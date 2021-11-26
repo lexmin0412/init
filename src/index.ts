@@ -6,12 +6,13 @@ const fs = require('fs')
 const HandleBars = require('handlebars')
 import {isDirectory} from './utils/isDirectory'
 import { deleteDirectory } from './utils/deleteDir'
+import { templateList } from './config/templates'
 
 let answerData = {}
 
 inquirer.prompt([{
 		type: 'list',
-		choices: ['工具类', '组件库', '应用框架'],
+		choices: ['空项目','工具类', '组件库', '业务应用'],
 		name: 'PKG_TYPE',
 		message: '请选择你想创建的模版应用',
 		default: []
@@ -43,8 +44,7 @@ inquirer.prompt([{
 	}
 	const {
 		PKG_TYPE,
-		PKG_NAME,
-		PKG_DESC
+		PKG_NAME
 	} = answers
 	// 根据回答
 	if (PKG_TYPE === '工具类') {
@@ -69,6 +69,10 @@ inquirer.prompt([{
 
 			if (PKG_TEMPLATE === 'rollup + ts 模版') {
 
+				const currentTemplate = templateList.find(item => {
+					return item.applicationType === 'LIB' && item.type === 'ROLLUP_TS'
+				})
+
 				console.log('正在下载选择的模版...')
 				const basePath = path.resolve(__dirname, '..', `./templates/template-rollup-ts`)
 
@@ -78,7 +82,7 @@ inquirer.prompt([{
 				}
 
 				// 每次都拉取最新的模版
-				download('direct:https://gitee.com/lexmin0412/rollup-ts-template-hbs.git', basePath, {
+				download(currentTemplate.repo, basePath, {
 					clone: true
 				}, (err) => {
 					if (err) {
@@ -97,7 +101,7 @@ inquirer.prompt([{
 						outerDirs.forEach((item) => {
 							const currentPath = `${root}${base}/${item}`
 							if (isDirectory(currentPath)) {
-								// 是文件夹再次遍历
+								// 是文件夹则递归
 								writeFile(`${root}${base}`, `/${item}`)
 							} else {
 								// 否则直接写入替换模版内容
