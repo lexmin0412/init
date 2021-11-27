@@ -54,8 +54,6 @@ inquirer.prompt([{
 		process.exit()
 	}
 }).then((answers) => {
-	console.log('结果为:')
-	console.log(answers)
 	answerData = {
 		...answerData,
 		...answers
