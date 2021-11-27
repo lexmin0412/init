@@ -2,6 +2,7 @@
  * 应用类型列表
  */
 export enum PKG_TYPE {
+	'EMPTY' = '空项目',
 	'LIB' = '工具类',
 	'COMPONENTS' = '组件库',
 	'APPLICATION_SPA_MOBILE' = '移动端单页应用',
@@ -9,14 +10,15 @@ export enum PKG_TYPE {
 	'NODEJS_SERVICE' = 'node服务'
 }
 
-export type PKG_TYPES = 'LIB' | 'COMPONENTS' | 'APPLICATION_SPA_MOBILE' | 'APPLICATION_SPA_DESKTOP' | 'NODEJS_SERVICE'
+export type PKG_TYPES = 'EMPTY' | 'LIB' | 'COMPONENTS' | 'APPLICATION_SPA_MOBILE' | 'APPLICATION_SPA_DESKTOP' | 'NODEJS_SERVICE'
 
-export type TEMPLATE_TYPES = 'ROLLUP_TS' | 'WEBPACK_TS' | 'TARO3_REACT_TS' | 'TARO3_VUE3_TS' | 'TARO3_VUE2_TS' | 'TARO2_TS' | 'WEBPACK_REACT_TS' | 'WEBPACK_VUE3_TS' | 'WEBPACK_VUE2_TS' | 'VITE_REACT_TS' | 'VITE_VUE3_TS'
+export type TEMPLATE_TYPES = 'EMPTY' | 'ROLLUP_TS' | 'WEBPACK_TS' | 'TARO3_REACT_TS' | 'TARO3_VUE3_TS' | 'TARO3_VUE2_TS' | 'TARO2_TS' | 'WEBPACK_REACT_TS' | 'WEBPACK_VUE3_TS' | 'WEBPACK_VUE2_TS' | 'VITE_REACT_TS' | 'VITE_VUE3_TS'
 
 /**
  * 工具类库模版
  */
 export enum LIB_TEMPLATE_TYPE {
+	'EMPTY' = 'empty',
 	'ROLLUP_TS' = 'rollup + ts',
 	'WEBPACK_TS' = 'webpack + ts'
 }

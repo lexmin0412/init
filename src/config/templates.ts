@@ -14,6 +14,17 @@ interface TemplateConfig {
 
 export const templateList: Array<TemplateConfig> = [
 	{
+		applicationType: 'EMPTY',
+		type: 'EMPTY',
+		name: LIB_TEMPLATE_TYPE.EMPTY,
+		repo: {
+			origin: 'github',
+			url: 'lexmin0412/youtils-project-templates',
+			clone: true,
+			accessToken: ''
+		}
+	},
+	{
 		applicationType: 'LIB',
 		type: 'ROLLUP_TS',
 		name: LIB_TEMPLATE_TYPE.ROLLUP_TS,
