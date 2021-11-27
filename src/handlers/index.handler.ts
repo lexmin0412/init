@@ -1,41 +1,43 @@
 const path = require('path')
-// const inquirer = require('inquirer')
-const download = require('download-git-repo')
 const fs = require('fs')
 const HandleBars = require('handlebars')
-import {isDirectory} from '../../utils/isDirectory'
-import {deleteDirectory} from '../../utils/deleteDir'
-import {templateList} from '../../config/templates'
+import { downloadTemplate } from './../utils/downloadTemplate'
+import {isDirectory} from '../utils/isDirectory'
+import {deleteDirectory} from '../utils/deleteDir'
+import {templateList} from '../config/templates'
+import {GITHUB} from '../constants/repo'
+import { logsEnd } from './../config/logs'
 
-export const EmptyHandler = (answerData) => {
+/**
+ * 模版处理
+ * @param answerData
+ */
+export const templateHandler = (answerData) => {
 
 	const {
-		PKG_NAME
+		PKG_NAME,
+		PKG_TYPE,
+		PKG_TEMPLATE
 	} = answerData
 
 	const currentTemplate = templateList.find(item => {
-		return item.applicationType === 'EMPTY' && item.type === 'EMPTY'
+		return item.applicationType === PKG_TYPE && item.type === PKG_TEMPLATE
 	})
 
 	console.log('正在下载选择的模版...')
-	const basePath = path.resolve(__dirname, '..', `./templates/template-empty`)
+	const basePath = path.resolve(__dirname, '..', currentTemplate.tmpDir)
 
 	// 删除原有模版
 	if (isDirectory(basePath)) {
 		deleteDirectory(basePath)
 	}
 
-	// 每次都拉取最新的模版
-	console.time('download time')
-	download(`github:${currentTemplate.repo.url}#main`, basePath, {clone: true}, err => {
-		if (err) {
-			console.log('下载错误', err);
-			return
-		}
-		console.log('模版下载成功 ✅');
-		console.timeEnd('download time')
-
-
+	downloadTemplate({
+		url: currentTemplate.repo.url,
+		originType: GITHUB,
+		branch: 'main',
+		targetDir: basePath
+	}).then(()=>{
 		const root = basePath
 		const base = ''
 
@@ -67,11 +69,10 @@ export const EmptyHandler = (answerData) => {
 				}
 			})
 		}
-
-		console.log('root', root)
-		console.log('base', base)
 		writeFile(root, base)
 
-		console.log('模版初始化成功')
+		logsEnd(answerData)
+	}).catch((err)=>{
+		console.error('下载错误', err)
 	})
 }

@@ -1,24 +1,11 @@
 const path = require('path')
-// const inquirer = require('inquirer')
 const inquirer = require('inquirer')
-const download = require('download-git-repo')
-const fs = require('fs')
-const HandleBars = require('handlebars')
-import {isDirectory} from './utils/isDirectory'
-import { deleteDirectory } from './utils/deleteDir'
-import { templateList } from './config/templates'
-import { RollupTsHandlers } from './handlers/lib/rollup_ts.handler'
-import { EmptyHandler } from './handlers/empty/empty.handlers'
+import {templateHandler} from './handlers/index.handler'
 
+let typeInfo = {}
 let answerData = {}
 
-inquirer.prompt([{
-		type: 'list',
-		choices: ['空项目','工具类', '组件库', '业务应用'],
-		name: 'PKG_TYPE',
-		message: '请选择你想创建的模版应用',
-		default: []
-	},
+const applicationInfoPrompts = [
 	{
 		type: 'input',
 		name: 'PKG_NAME',
@@ -36,8 +23,37 @@ inquirer.prompt([{
 		name: 'PKG_VERSION',
 		message: '请输入应用初始版本',
 		default: '0.0.1'
-	},
-]).then((answers) => {
+	}
+]
+
+inquirer.prompt([{
+		type: 'list',
+		choices: [{
+			name: '空项目',
+			value: 'EMPTY'
+		},'工具类', '组件库', '业务应用'],
+		name: 'PKG_TYPE',
+		message: '请选择你想创建的模版应用',
+		default: []
+	}
+]).then(answers=>{
+
+	const { PKG_TYPE } = answers
+	if (['EMPTY', 'LIB'].includes(PKG_TYPE) ) {
+		return new Promise((resolve)=>{
+			inquirer.prompt(applicationInfoPrompts).then((curAnswers)=>{
+				resolve({
+					...answers,
+					...curAnswers
+				})
+			})
+		})
+	} else {
+		Promise.reject()
+		console.error(`不支持的应用类型: ${PKG_TYPE}`)
+		process.exit()
+	}
+}).then((answers) => {
 	console.log('结果为:')
 	console.log(answers)
 	answerData = {
@@ -45,66 +61,44 @@ inquirer.prompt([{
 		...answers
 	}
 	const {
-		PKG_TYPE,
-		PKG_NAME
+		PKG_TYPE
 	} = answers
-	// 根据回答
 
-	if ( PKG_TYPE === '空项目' ) {
-		inquirer.prompt([{
+	const templatePromtQuestions: any = [
+		{
 			type: 'list',
 			name: 'PKG_TEMPLATE',
 			choices: ['默认模版'],
 			message: '请选择模版',
 			default: '默认模版'
-		}]).then((pkgTemplateAnswers) => {
-			answerData = {
-				...answerData,
-				...pkgTemplateAnswers
-			}
-			console.log('pkgTemplateAnswers', pkgTemplateAnswers);
+		}
+	]
 
-			const {
-				PKG_TEMPLATE
-			} = pkgTemplateAnswers
-
-			if (PKG_TEMPLATE === '默认模版') {
-
-				EmptyHandler(answerData)
-			}
-
-		})
+	if (PKG_TYPE === 'EMPTY') {
+		templatePromtQuestions[0] = {
+			...templatePromtQuestions[0],
+			choices: [{
+				name: '默认模版',
+				value: 'EMPTY_DEFAULT'
+			}],
+			default: 'EMPTY_DEFAULT'
+		}
 	}
-
-	else if (PKG_TYPE === '工具类') {
-		console.log('选择了工具类');
-
-		inquirer.prompt([{
-			type: 'list',
-			name: 'PKG_TEMPLATE',
+	else if (PKG_TYPE === 'LIB') {
+		templatePromtQuestions[0] = {
+			...templatePromtQuestions[0],
 			choices: ['rollup + ts 模版'],
-			message: '请选择模版',
 			default: 'rollup + ts模版'
-		}]).then((pkgTemplateAnswers) => {
-			answerData = {
-				...answerData,
-				...pkgTemplateAnswers
-			}
-
-			const {
-				PKG_TEMPLATE
-			} = pkgTemplateAnswers
-
-			if (PKG_TEMPLATE === 'rollup + ts 模版') {
-
-				RollupTsHandlers({
-					answers,
-					pkgTemplateAnswers
-				})
-			}
-
-		})
+		}
 	} else {
-		console.log('暂不支持的应用类型');
+		console.error(`不支持的应用类型: ${PKG_TYPE}`);
+		process.exit()
 	}
+
+	inquirer.prompt(templatePromtQuestions).then((pkgTemplateAnswers) => {
+		templateHandler({
+			...answerData,
+			...pkgTemplateAnswers
+		})
+	})
 })
