@@ -70,10 +70,7 @@ inquirer.prompt([{
 
 			if (PKG_TEMPLATE === '默认模版') {
 
-				EmptyHandler({
-					answers,
-					pkgTemplateAnswers
-				})
+				EmptyHandler(answerData)
 			}
 
 		})

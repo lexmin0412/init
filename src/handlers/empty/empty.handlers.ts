@@ -7,17 +7,11 @@ import {isDirectory} from '../../utils/isDirectory'
 import {deleteDirectory} from '../../utils/deleteDir'
 import {templateList} from '../../config/templates'
 
-let answerData = {}
-
-export const EmptyHandler = (params) => {
-
-	const {
-		answers
-	} = params
+export const EmptyHandler = (answerData) => {
 
 	const {
 		PKG_NAME
-	} = answers
+	} = answerData
 
 	const currentTemplate = templateList.find(item => {
 		return item.applicationType === 'EMPTY' && item.type === 'EMPTY'
