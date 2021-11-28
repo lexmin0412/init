@@ -35,32 +35,36 @@ export const templateHandler = (answerData) => {
 	downloadTemplate({
 		url: currentTemplate.repo.url,
 		originType: GITHUB,
-		branch: 'main',
+		branch: currentTemplate.branch,
 		targetDir: basePath
 	}).then(()=>{
 		const root = basePath
 		const base = ''
+		fs.mkdirSync(PKG_NAME)
 
 		// 写入用户选项到模版文件
 		const writeFile = (root, base) => {
 			const outerDirs = fs.readdirSync(`${root}${base}`)
 			outerDirs.forEach((item) => {
 				const currentPath = `${root}${base}/${item}`
+				const targetDirName = `./${PKG_NAME}${base}/${item}`
 				if (isDirectory(currentPath)) {
+					fs.mkdirSync(targetDirName)
+
 					// 是文件夹则递归
-					writeFile(`${root}${base}`, `/${item}`)
+					writeFile(`${root}`, `${base}/${item}`)
 				} else {
 					// 否则直接写入替换模版内容
 					// 使用handlebars填入内容
 					const string = fs.readFileSync(currentPath).toString()
 					const template = HandleBars.compile(string)
+					const fileName = `./${PKG_NAME}${base}/${item}`
 
-					const dirName = `./${PKG_NAME}${base}`
-					if (!isDirectory(dirName)) {
-						fs.mkdirSync(dirName)
+					// 过滤非模版文件
+					if (!fileName.endsWith('.hbs')) {
+						return
 					}
 
-					const fileName = `./${PKG_NAME}${base}/${item}`
 					const dotIndex = fileName.indexOf('.hbs')
 					const trueFileName = fileName.slice(0, dotIndex)
 

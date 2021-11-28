@@ -1,6 +1,7 @@
 const path = require('path')
 const inquirer = require('inquirer')
 import {templateHandler} from './handlers/index.handler'
+import { PKG_TYPE_LIST } from './config/promts'
 
 let typeInfo = {}
 let answerData = {}
@@ -28,10 +29,7 @@ const applicationInfoPrompts = [
 
 inquirer.prompt([{
 		type: 'list',
-		choices: [{
-			name: '空项目',
-			value: 'EMPTY'
-		},'工具类', '组件库', '业务应用'],
+		choices: PKG_TYPE_LIST,
 		name: 'PKG_TYPE',
 		message: '请选择你想创建的模版应用',
 		default: []
@@ -39,7 +37,7 @@ inquirer.prompt([{
 ]).then(answers=>{
 
 	const { PKG_TYPE } = answers
-	if (['EMPTY', 'LIB'].includes(PKG_TYPE) ) {
+	if (['EMPTY', 'LIB', 'PLUGIN'].includes(PKG_TYPE) ) {
 		return new Promise((resolve)=>{
 			inquirer.prompt(applicationInfoPrompts).then((curAnswers)=>{
 				resolve({
@@ -81,6 +79,43 @@ inquirer.prompt([{
 			}],
 			default: 'EMPTY_DEFAULT'
 		}
+	}
+	else if ( PKG_TYPE === 'PLUGIN' ) {
+		templatePromtQuestions[0] = {
+			...templatePromtQuestions[0],
+			choices: [{
+				name: 'taro 2.x 插件模版',
+				value: 'PLUGIN_TARO2'
+			}],
+			default: 'PLUGIN_TARO2'
+		}
+		templatePromtQuestions.push({
+			type: 'list',
+			name: 'TARO_VERSION',
+			choices: [
+				'2.2.18',
+				'2.2.17',
+				'2.2.16',
+				'2.2.15',
+				'2.2.14',
+				'2.2.13',
+				'2.2.12',
+				'2.2.11',
+				'2.2.10',
+				'2.2.9',
+				'2.2.8',
+				'2.2.7',
+				'2.2.6',
+				'2.2.5',
+				'2.2.4',
+				'2.2.3',
+				'2.2.2',
+				'2.2.1',
+				'2.2.0',
+			],
+			message: '请选择 Taro 版本',
+			default: '2.2.18'
+		})
 	}
 	else if (PKG_TYPE === 'LIB') {
 		templatePromtQuestions[0] = {

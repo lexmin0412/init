@@ -59,6 +59,19 @@ export const templateList: Array<TemplateConfig> = [
 		}
 	},
 	{
+		applicationType: 'PLUGIN',
+		tmpDir: './templates/template-plugin-taro2',
+		type: 'PLUGIN_TARO2',
+		name: LIB_TEMPLATE_TYPE.PLUGIN_TARO2,
+		branch: 'master',
+		repo: {
+			origin: 'github',
+			url: 'lexmin0412/project-template-plugin-taro-2.x',
+			clone: true,
+			accessToken: ''
+		}
+	},
+	{
 		applicationType: 'LIB',
 		type: 'ROLLUP_TS',
 		name: LIB_TEMPLATE_TYPE.ROLLUP_TS,
