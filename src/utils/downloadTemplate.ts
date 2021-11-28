@@ -27,7 +27,9 @@ export const downloadTemplate = ({
 		switch (originType) {
 			case GITHUB:
 				console.time('模版下载时长')
-				download(`github:${url}#${branch}`, targetDir, null, err => {
+				download(`github:${url}#${branch}`, targetDir, {
+					clone: true
+				}, err => {
 					console.log('模版下载成功 ✅');
 					if (err) {
 						reject(err)
