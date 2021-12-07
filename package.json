@@ -1,6 +1,6 @@
 {
   "name": "@youtils/cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "一个脚手架，搭建一切",
   "main": "dist/bundle.js",
   "scripts": {

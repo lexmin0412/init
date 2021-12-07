@@ -35,8 +35,12 @@ $ npx youtils-cli
 
 当前我们暂时只支持初始化空项目，在短期内会支持如下模版：
 
-- [ ] 基于 Rollup 的工具类
+- [x] 基于 Rollup 的工具类
 - [x] taro 插件
 - [ ] taro 2.x/3.x 项目模版
 
 当然在更遥远的未来，一切都是可能的。
+
+## 更新日志
+
+- [点我](https://github.com/lexmin0412/youtils-cli/blob/master/CHANGELOG.md)
