@@ -76,8 +76,8 @@ export const templateList: Array<TemplateConfig> = [
 		type: 'ROLLUP_TS',
 		name: LIB_TEMPLATE_TYPE.ROLLUP_TS,
 		repo: {
-			origin: 'gitee',
-			url: 'https://gitee.com/lexmin0412/rollup-ts-template-hbs.git',
+			origin: 'github',
+			url: 'lexmin0412/project-template-lib-rollup',
 			clone: true,
 			accessToken: ''
 		},

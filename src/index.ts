@@ -120,8 +120,13 @@ inquirer.prompt([{
 	else if (PKG_TYPE === 'LIB') {
 		templatePromtQuestions[0] = {
 			...templatePromtQuestions[0],
-			choices: ['rollup + ts 模版'],
-			default: 'rollup + ts模版'
+			choices: [
+				{
+					name: 'rollup + ts 模版',
+					value: 'ROLLUP_TS'
+				}
+			],
+			default: 'ROLLUP_TS'
 		}
 	} else {
 		console.error(`不支持的应用类型: ${PKG_TYPE}`);
