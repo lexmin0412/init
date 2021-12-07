@@ -7,7 +7,7 @@ export const PKG_TYPE_LIST = [
 		value: 'EMPTY'
 	},
 	{
-		name: '工具类',
+		name: '工具类库',
 		value: 'LIB'
 	},
 	{
@@ -17,5 +17,9 @@ export const PKG_TYPE_LIST = [
 	{
 		name: '插件',
 		value: 'PLUGIN'
+	},
+	{
+		name: '文档项目',
+		value: 'DOCS'
 	}
 ]

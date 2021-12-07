@@ -37,7 +37,7 @@ inquirer.prompt([{
 ]).then(answers=>{
 
 	const { PKG_TYPE } = answers
-	if (['EMPTY', 'LIB', 'PLUGIN'].includes(PKG_TYPE) ) {
+	if (['EMPTY', 'LIB', 'PLUGIN', 'DOCS'].includes(PKG_TYPE) ) {
 		return new Promise((resolve)=>{
 			inquirer.prompt(applicationInfoPrompts).then((curAnswers)=>{
 				resolve({
@@ -128,7 +128,20 @@ inquirer.prompt([{
 			],
 			default: 'ROLLUP_TS'
 		}
-	} else {
+	}
+	else if ( PKG_TYPE === 'DOCS' ) {
+		templatePromtQuestions[0] = {
+			...templatePromtQuestions[0],
+			choices: [
+				{
+					name: 'docsify',
+					value: 'DOCS_DOCSIFY'
+				}
+			],
+			default: 'DOCS_DOCSIFY'
+		}
+	}
+	else {
 		console.error(`不支持的应用类型: ${PKG_TYPE}`);
 		process.exit()
 	}

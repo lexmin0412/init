@@ -83,5 +83,18 @@ export const templateList: Array<TemplateConfig> = [
 		},
 		branch: 'master',
 		tmpDir: './templates/template-rollup-ts',
+	},
+	{
+		applicationType: 'DOCS',
+		type: 'DOCS_DOCSIFY',
+		name: LIB_TEMPLATE_TYPE.DOCS_DOCSIFY,
+		repo: {
+			origin: 'github',
+			url: 'lexmin0412/project-template-docs-docsify',
+			clone: true,
+			accessToken: ''
+		},
+		branch: 'main',
+		tmpDir: './templates/template-docs-docsify',
 	}
 ]
