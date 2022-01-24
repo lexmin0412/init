@@ -11,15 +11,15 @@ export const PKG_TYPE_LIST = [
 		value: 'LIB'
 	},
 	{
-		name: '组件库',
-		value: 'COMPONENTS_LIB'
-	},
-	{
 		name: '插件',
 		value: 'PLUGIN'
 	},
 	{
 		name: '文档项目',
 		value: 'DOCS'
+	},
+	{
+		name: '应用',
+		value: 'APPLICATION'
 	}
 ]

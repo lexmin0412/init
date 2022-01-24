@@ -36,8 +36,10 @@ inquirer.prompt([{
 	}
 ]).then(answers=>{
 
+	const PKG_TYPE_NAMES = PKG_TYPE_LIST.map((item)=>item.value)
+
 	const { PKG_TYPE } = answers
-	if (['EMPTY', 'LIB', 'PLUGIN', 'DOCS'].includes(PKG_TYPE) ) {
+	if (PKG_TYPE_NAMES.includes(PKG_TYPE) ) {
 		return new Promise((resolve)=>{
 			inquirer.prompt(applicationInfoPrompts).then((curAnswers)=>{
 				resolve({
@@ -139,6 +141,18 @@ inquirer.prompt([{
 				}
 			],
 			default: 'DOCS_DOCSIFY'
+		}
+	}
+	else if (PKG_TYPE === 'APPLICATION') {
+		templatePromtQuestions[0] = {
+			...templatePromtQuestions[0],
+			choices: [
+				{
+					name: 'vite + react + antd',
+					value: 'VITE_REACT_ANTD_ADMIN'
+				}
+			],
+			default: 'VITE_REACT_ANTD_ADMIN'
 		}
 	}
 	else {

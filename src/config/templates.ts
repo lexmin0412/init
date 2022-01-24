@@ -96,5 +96,18 @@ export const templateList: Array<TemplateConfig> = [
 		},
 		branch: 'main',
 		tmpDir: './templates/template-docs-docsify',
+	},
+	{
+		applicationType: 'APPLICATION',
+		type: 'VITE_REACT_ANTD_ADMIN',
+		name: LIB_TEMPLATE_TYPE.VITE_REACT_ANTD_ADMIN,
+		repo: {
+			origin: 'github',
+			url: 'lexmin0412/vite-react-admin',
+			clone: true,
+			accessToken: ''
+		},
+		branch: 'master',
+		tmpDir: './templates/template-application-vite-react-antd-admin',
 	}
 ]
