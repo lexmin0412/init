@@ -44,4 +44,4 @@ $ npx youtils-cli
 
 ## 更新日志
 
-- [点我](https://github.com/lexmin0412/youtils-cli/blob/master/CHANGELOG.md)
+- [点我查看](https://github.com/lexmin0412/youtils-cli/blob/master/CHANGELOG.md)
