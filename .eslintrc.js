@@ -6,4 +6,7 @@ module.exports = {
 	globals: {
 		module: true,
 	},
+	rules: {
+		'@typescript-eslint/no-var-requires': 'off',
+	},
 }
