@@ -8,14 +8,13 @@
     "build": "rollup --config rollup.config.js",
     "prepare": "husky install"
   },
-  "homepage": "https://github.com/lexmin0412/youtils-cli#readme",
+  "homepage": "https://github.com/lexmin0412/init#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lexmin0412/youtils-cli"
+    "url": "https://github.com/lexmin0412/init"
   },
   "bin": {
-		"init": "bin/cli.js",
-    "youtils-cli": "bin/cli.js"
+		"init": "bin/cli.js"
   },
   "keywords": [
     "cli",
