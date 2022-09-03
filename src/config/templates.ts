@@ -1,4 +1,10 @@
-import { PKG_TYPE, LIB_TEMPLATE_TYPE, APPLICATION_TEMPLATE_TYPE, PKG_TYPES, TEMPLATE_TYPES} from './../config/index'
+import {
+	PKG_TYPE,
+	LIB_TEMPLATE_TYPE,
+	APPLICATION_TEMPLATE_TYPE,
+	PKG_TYPES,
+	TEMPLATE_TYPES,
+} from './../config/index'
 
 interface TemplateConfig {
 	/**
@@ -55,8 +61,8 @@ export const templateList: Array<TemplateConfig> = [
 			origin: 'github',
 			url: 'lexmin0412/youtils-project-templates',
 			clone: true,
-			accessToken: ''
-		}
+			accessToken: '',
+		},
 	},
 	{
 		applicationType: 'PLUGIN',
@@ -68,8 +74,21 @@ export const templateList: Array<TemplateConfig> = [
 			origin: 'github',
 			url: 'lexmin0412/project-template-plugin-taro-2.x',
 			clone: true,
-			accessToken: ''
-		}
+			accessToken: '',
+		},
+	},
+	{
+		applicationType: 'PLUGIN',
+		tmpDir: './templates/template-plugin-taro3',
+		type: 'PLUGIN_TARO3',
+		name: LIB_TEMPLATE_TYPE.PLUGIN_TARO3,
+		branch: 'master',
+		repo: {
+			origin: 'github',
+			url: 'lexmin0412/project-template-plugin-taro-3.x',
+			clone: true,
+			accessToken: '',
+		},
 	},
 	{
 		applicationType: 'LIB',
@@ -79,7 +98,7 @@ export const templateList: Array<TemplateConfig> = [
 			origin: 'github',
 			url: 'lexmin0412/project-template-lib-rollup',
 			clone: true,
-			accessToken: ''
+			accessToken: '',
 		},
 		branch: 'master',
 		tmpDir: './templates/template-rollup-ts',
@@ -92,7 +111,7 @@ export const templateList: Array<TemplateConfig> = [
 			origin: 'github',
 			url: 'lexmin0412/project-template-docs-docsify',
 			clone: true,
-			accessToken: ''
+			accessToken: '',
 		},
 		branch: 'main',
 		tmpDir: './templates/template-docs-docsify',
@@ -105,9 +124,9 @@ export const templateList: Array<TemplateConfig> = [
 			origin: 'github',
 			url: 'lexmin0412/vite-react-admin',
 			clone: true,
-			accessToken: ''
+			accessToken: '',
 		},
 		branch: 'master',
 		tmpDir: './templates/template-application-vite-react-antd-admin',
-	}
+	},
 ]
