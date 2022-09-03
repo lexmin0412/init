@@ -1,6 +1,6 @@
 {
   "name": "@youtils/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "前端开发通用脚手架，一键生成应用/组件/插件模版",
   "main": "dist/bundle.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "url": "https://github.com/lexmin0412/youtils-cli"
   },
   "bin": {
+		"init": "bin/cli.js",
     "youtils-cli": "bin/cli.js"
   },
   "keywords": [
