@@ -1,5 +1,5 @@
 {
-  "name": "@youtils/cli",
+  "name": "@lexmin0412/cli",
   "version": "0.2.0",
   "description": "前端开发通用脚手架，一键生成应用/组件/插件模版",
   "main": "dist/bundle.js",
